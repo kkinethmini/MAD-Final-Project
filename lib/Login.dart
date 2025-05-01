@@ -1,6 +1,7 @@
 import 'package:black_hole/Appbardf.dart';
 import 'package:black_hole/Drewer.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -65,6 +66,29 @@ class Home extends StatelessWidget {
                       child: const Text('Sign up'),
                     ),
                   ],
+                ),
+
+                ElevatedButton.icon(
+                  icon: const FaIcon(
+                    FontAwesomeIcons.google,
+                    color: Colors.red,
+                  ),
+                  label: const Text('Login in with Google'),
+                  onPressed: () {
+                    // Your sign-in logic
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    textStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
               ],
             ),
