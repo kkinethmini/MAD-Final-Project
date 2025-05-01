@@ -11,7 +11,6 @@ class Home extends StatelessWidget {
       child: Scaffold(
         appBar: Appbardf(),
         drawer: Drewer(),
-
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -26,11 +25,46 @@ class Home extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 TextField(
-                  obscureText: true, // <-- hide password
+                  obscureText: true,
                   decoration: const InputDecoration(
                     labelText: "Password",
                     border: OutlineInputBorder(),
                   ),
+                ),
+                const SizedBox(height: 20),
+
+                // Login Button
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/signup');
+                  },
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 40),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                // Signup Prompt Row
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "If you haven't account ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/signup');
+                      },
+                      child: const Text('Sign up'),
+                    ),
+                  ],
                 ),
               ],
             ),

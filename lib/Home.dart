@@ -23,13 +23,6 @@ class Home extends StatelessWidget {
                 },
                 child: Text('Go to Login'),
               ),
-
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/signup');
-                },
-                child: Text('Go to Signup'),
-              ),
             ],
           ),
         ),
