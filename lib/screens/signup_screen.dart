@@ -23,8 +23,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     setState(() => isLoading = true);
     try {
       // Create user in Firebase Auth
-      UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
@@ -199,19 +199,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       isLoading
                           ? Center(child: CircularProgressIndicator())
                           : ElevatedButton(
-                              onPressed: signUp,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.deepPurple,
-                                minimumSize: Size(double.infinity, 50),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                              ),
-                              child: Text(
-                                'SIGN UP',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
+                        onPressed: signUp,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepPurple,
+                          minimumSize: Size(double.infinity, 50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Text(
+                          'SIGN UP',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
                       SizedBox(height: 16),
                       TextButton(
                         onPressed: () {

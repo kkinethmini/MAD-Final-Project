@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1074930263459",
+    "project_id": "mad-p-f8cca",
+    "storage_bucket": "mad-p-f8cca.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074930263459:android:d6b4ddbb3656002fdaa616",
+        "android_client_info": {
+          "package_name": "com.example.black_hole"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDu-uWt8IzyhP2HPWOGWTwuU1hb564yOlA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

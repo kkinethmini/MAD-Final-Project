@@ -1,17 +1,57 @@
 import 'package:black_hole/Appbardf.dart';
 import 'package:black_hole/Drewer.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState(); // ✅ Fix class name
+}
+
+class _LoginState extends State<Login> {
+  final TextEditingController _emailController =
+      TextEditingController(); // ✅ Email
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> loginUser() async {
+    final String email = _emailController.text.trim();
+    final String password = _passwordController.text;
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login successful')),
+      );
+
+      Navigator.pushNamed(context, '/home');
+    } on FirebaseAuthException catch (e) {
+      print('Login failed: ${e.code} - ${e.message}');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Login failed: ${e.message}')),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: Appbardf(),
-        drawer: Drewer(),
+        appBar: const Appbardf(),
+        drawer: const Drewer(),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -19,13 +59,15 @@ class Home extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextField(
+                  controller: _emailController,
                   decoration: const InputDecoration(
-                    labelText: "User Name",
+                    labelText: "Email", // ✅ Changed from "User Name"
                     border: OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 20),
                 TextField(
+                  controller: _passwordController,
                   obscureText: true,
                   decoration: const InputDecoration(
                     labelText: "Password",
@@ -33,26 +75,19 @@ class Home extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-
-                // Login Button
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/signup');
-                  },
+                  onPressed: loginUser,
                   child: const Text(
                     'Login',
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 40),
                   ),
                 ),
-
                 const SizedBox(height: 20),
-
-                // Signup Prompt Row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "If you haven't account ",
+                      "Don't have an account?",
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 16,
@@ -65,17 +100,22 @@ class Home extends StatelessWidget {
                       },
                       child: const Text('Sign up'),
                     ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/q1');
+                      },
+                      child: const Text('q1'),
+                    ),
                   ],
                 ),
-
                 ElevatedButton.icon(
                   icon: const FaIcon(
                     FontAwesomeIcons.google,
                     color: Colors.red,
                   ),
-                  label: const Text('Login in with Google'),
+                  label: const Text('Login with Google'), // ✅ Typo fixed
                   onPressed: () {
-                    // Your sign-in logic
+                    // TODO: Add Google sign-in logic
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
