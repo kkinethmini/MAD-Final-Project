@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_bottom_nav.dart';
 import '../widgets/custom_header.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -12,6 +14,40 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   int _currentIndex = 3;
   final List<String> _routes = ['/home', '/progress', '/courses', '/account'];
+
+  String? _userName;
+  String? _email;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserData();
+  }
+
+  Future<void> _fetchUserData() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final doc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .get();
+        setState(() {
+          _userName = doc['username'] ?? user.displayName ?? 'User';
+          _email = user.email ?? 'Not available';
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _userName = 'User';
+        _email = 'Unavailable';
+        _isLoading = false;
+      });
+      print('Error fetching user data: $e');
+    }
+  }
 
   void _onNavTapped(int index) {
     if (index != _currentIndex) {
@@ -55,10 +91,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         const CircleAvatar(
                           radius: 50,
-                          backgroundImage: AssetImage('assets/avatar_placeholder.png'),
+                          backgroundImage:
+                              AssetImage('assets/avatar_placeholder.png'),
                         ),
                         IconButton(
-                          icon: const Icon(Icons.edit, color: Colors.deepPurple),
+                          icon:
+                              const Icon(Icons.edit, color: Colors.deepPurple),
                           onPressed: () {
                             // Handle image change
                           },
@@ -67,10 +105,18 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Text('Username: solo_user', style: TextStyle(fontSize: 16)),
-                  const Text('Email: solo@example.com', style: TextStyle(fontSize: 16)),
+                  _isLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Username: $_userName',
+                                style: const TextStyle(fontSize: 16)),
+                            Text('Email: $_email',
+                                style: const TextStyle(fontSize: 16)),
+                          ],
+                        ),
                   const Divider(height: 40),
-
                   ListTile(
                     leading: const Icon(Icons.person),
                     title: const Text('Edit Profile'),
@@ -91,9 +137,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       value: language,
                       onChanged: _changeLanguage,
                       items: const [
-                        DropdownMenuItem(value: 'English', child: Text('English')),
+                        DropdownMenuItem(
+                            value: 'English', child: Text('English')),
                         DropdownMenuItem(value: 'Hindi', child: Text('Hindi')),
-                        DropdownMenuItem(value: 'Spanish', child: Text('Spanish')),
+                        DropdownMenuItem(
+                            value: 'Spanish', child: Text('Spanish')),
                       ],
                     ),
                   ),
