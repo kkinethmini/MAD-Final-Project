@@ -47,7 +47,8 @@ class _LoginScreenState extends State<LoginScreen> {
         message = e.message ?? message;
       }
 
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(message)));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
@@ -152,9 +153,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: _isLoading
                         ? const CircularProgressIndicator(color: Colors.white)
                         : const Text(
-                      'SIGN IN',
-                      style: TextStyle(color: Colors.white),
-                    ),
+                            'SIGN IN',
+                            style: TextStyle(color: Colors.white),
+                          ),
                   ),
                   const SizedBox(height: 16),
                   TextButton(

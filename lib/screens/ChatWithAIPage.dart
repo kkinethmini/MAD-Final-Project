@@ -1,3 +1,4 @@
+import 'package:black_hole/services/gemini_services.dart';
 import 'package:flutter/material.dart';
 
 class ChatWithAIPage extends StatefulWidget {
@@ -9,17 +10,27 @@ class ChatWithAIPage extends StatefulWidget {
 
 class _ChatWithAIPageState extends State<ChatWithAIPage> {
   final TextEditingController _controller = TextEditingController();
+  final GeminiService _geminiService = GeminiService();
   final List<Map<String, String>> _messages = [];
 
-  void _sendMessage() {
-    final text = _controller.text.trim();
-    if (text.isNotEmpty) {
-      setState(() {
-        _messages.add({'sender': 'user', 'text': text});
-        _messages.add({'sender': 'bot', 'text': 'Thanks for your question! I\'ll help you with "$text".'});
-        _controller.clear();
-      });
-    }
+  bool _isLoading = false;
+
+  void _sendPrompt() async {
+    final prompt = _controller.text.trim();
+    if (prompt.isEmpty) return;
+
+    setState(() {
+      _messages.add({'sender': 'user', 'text': prompt});
+      _isLoading = true;
+      _controller.clear();
+    });
+
+    final response = await _geminiService.generateText(prompt);
+
+    setState(() {
+      _messages.add({'sender': 'bot', 'text': response});
+      _isLoading = false;
+    });
   }
 
   Widget _buildMessage(String sender, String text) {
@@ -66,6 +77,11 @@ class _ChatWithAIPageState extends State<ChatWithAIPage> {
               },
             ),
           ),
+          if (_isLoading)
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CircularProgressIndicator(),
+            ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             color: Colors.white,
@@ -78,7 +94,8 @@ class _ChatWithAIPageState extends State<ChatWithAIPage> {
                       hintText: 'Ask something...',
                       filled: true,
                       fillColor: Colors.deepPurple.shade50,
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 14, vertical: 10),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(24),
                         borderSide: BorderSide.none,
@@ -87,12 +104,9 @@ class _ChatWithAIPageState extends State<ChatWithAIPage> {
                   ),
                 ),
                 const SizedBox(width: 8),
-                CircleAvatar(
-                  backgroundColor: Colors.deepPurple,
-                  child: IconButton(
-                    icon: const Icon(Icons.send, color: Colors.white),
-                    onPressed: _sendMessage,
-                  ),
+                IconButton(
+                  icon: const Icon(Icons.send, color: Colors.deepPurple),
+                  onPressed: _isLoading ? null : _sendPrompt,
                 ),
               ],
             ),
