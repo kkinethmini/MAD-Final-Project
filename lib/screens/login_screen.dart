@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:black_hole/screens/AddminScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -34,8 +36,23 @@ class _LoginScreenState extends State<LoginScreen> {
         password: password,
       );
 
-      // ✅ Navigate to home screen on successful login
-      Navigator.pushReplacementNamed(context, '/home');
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .get();
+
+      // ✅ Check role
+      final role = userDoc.data()?['role'] ?? 'user';
+
+
+
+
+
+      if ( role == 'admin') {
+        Navigator.pushReplacementNamed(context, '/admin');
+      } else {
+        Navigator.pushReplacementNamed(context, '/home');
+      }
     } on FirebaseAuthException catch (e) {
       String message = 'Login failed';
 
