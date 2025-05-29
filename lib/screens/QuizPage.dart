@@ -73,3 +73,41 @@ class _QuizPageState extends State<QuizPage> {
       'answer': 3,
     },
   ];
+  void nextQuestion() {
+    if (selectedOption == -1) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Answer Question First")));
+      return;
+    }
+
+    if (selectedOption == questions[currentQuestion]['answer']) {
+      score++;
+    }
+
+    if (currentQuestion < questions.length - 1) {
+      setState(() {
+        currentQuestion++;
+        selectedOption = -1;
+      });
+    } else {
+      // Show result dialog
+      showQuizResultDialog(
+        context: context,
+        score: score,
+        totalQuestions: questions.length,
+        onPass: () {
+          Navigator.pop(context); // close dialog
+          Navigator.pushReplacementNamed(context, '/courses');
+        },
+        onFail: () {
+          Navigator.pop(context); // close dialog
+          setState(() {
+            currentQuestion = 0;
+            selectedOption = -1;
+            score = 0;
+          });
+        },
+      );
+    }
+  }
