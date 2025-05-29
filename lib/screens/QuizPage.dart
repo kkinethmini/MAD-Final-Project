@@ -111,3 +111,24 @@ class _QuizPageState extends State<QuizPage> {
       );
     }
   }
+  @override
+  Widget build(BuildContext context) {
+    final question = questions[currentQuestion];
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Column(
+        children: [
+          const CustomHeader(title: 'Python Quiz'),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Q${currentQuestion + 1} of ${questions.length}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
