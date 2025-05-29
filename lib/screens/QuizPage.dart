@@ -160,3 +160,38 @@ class _QuizPageState extends State<QuizPage> {
                               : Colors.grey.shade300,
                         ),
                       ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            isSelected
+                                ? Icons.radio_button_checked
+                                : Icons.radio_button_off,
+                            color: isSelected ? Colors.deepPurple : Colors.grey,
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              question['options'][index],
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    OutlinedButton(
+                      onPressed: () {
+                        setState(() {
+                          selectedOption = -1;
+                          if (currentQuestion < questions.length - 1) {
+                            currentQuestion++;
+                          }
+                        });
+                      },
+                      child: const Text("Skip"),
+                    ),
