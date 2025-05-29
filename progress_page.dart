@@ -96,3 +96,74 @@ class MyCoursesPage extends StatelessWidget {
     );
   }
 }
+class CourseCard extends StatelessWidget {
+  final Map<String, dynamic> course;
+
+  const CourseCard({required this.course});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 16),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Course title and level badge
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(course['title'],
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold)),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.purple.shade100,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(course['level'],
+                      style: const TextStyle(fontSize: 12)),
+                )
+              ],
+            ),
+            const SizedBox(height: 12),
+             // Progress bar
+            LinearProgressIndicator(
+              value: course['progress'],
+              backgroundColor: Colors.grey.shade300,
+              color: Colors.deepPurple,
+            ),
+            const SizedBox(height: 12),
+             // Continue button navigates to course detail page
+            Align(
+              alignment: Alignment.centerRight,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) =>
+                            CourseDetailPage(title: course['title'])),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                ),
+                child: const Text(
+                  'Continue',
+                  style: TextStyle(color: Colors.amber),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
