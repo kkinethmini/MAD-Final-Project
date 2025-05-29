@@ -223,3 +223,15 @@ class _QuizPageState extends State<QuizPage> {
           ),
         ],
       ),
+      bottomNavigationBar: CustomBottomNav(
+        currentIndex: 1,
+        onTap: (index) {
+          Navigator.pushReplacementNamed(
+            context,
+            ['/home', '/progress', '/courses', '/account'][index],
+          );
+        },
+      ),
+    );
+  }
+}
