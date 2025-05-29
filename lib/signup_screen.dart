@@ -39,3 +39,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
         'uid': userCredential.user!.uid,
         'createdAt': Timestamp.now(),
       });
+
+// Navigate to home
+      Navigator.pushReplacementNamed(context, '/home');
+    } on FirebaseAuthException catch (e) {
+      String errorMsg = 'Signup failed';
+      if (e.code == 'email-already-in-use') {
+        errorMsg = 'Email already in use';
+      } else if (e.code == 'weak-password') {
+        errorMsg = 'Password should be at least 6 characters';
+      } else if (e.code == 'invalid-email') {
+        errorMsg = 'Invalid email format';
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMsg)),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Something went wrong: ${e.toString()}')),
+      );
+    } finally {
+      setState(() => isLoading = false);
+    }
+  }
