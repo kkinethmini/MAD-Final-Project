@@ -62,3 +62,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() => isLoading = false);
     }
   }
+
+@override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.deepPurple,
+      body: Column(
+        children: [
+          SizedBox(height: 100),
+          Text(
+            'Solo Learning',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.5,
+            ),
+          ),
