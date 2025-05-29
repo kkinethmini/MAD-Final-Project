@@ -79,3 +79,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
               letterSpacing: 1.5,
             ),
           ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+              ),
+              child: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 32),
+                      RichText(
+                        text: TextSpan(
+                          text: 'SIGN IN',
+                          style: TextStyle(fontSize: 22, color: Colors.grey),
+                          children: [
+                            TextSpan(
+                              text: ' / SIGN UP',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 24),
+                      TextFormField(
+                        controller: usernameController,
+                        decoration: InputDecoration(
+                          hintText: 'Your Username',
+                          filled: true,
+                          fillColor: Colors.purple.shade50,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide.none,
+                          ),
+                        ),
