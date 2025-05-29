@@ -149,3 +149,48 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           return null;
                         },
                       ),
+                      SizedBox(height: 12),
+                      TextFormField(
+                        controller: mobileController,
+                        decoration: InputDecoration(
+                          hintText: 'Mobile No.',
+                          prefixIcon: Icon(Icons.phone_android),
+                          filled: true,
+                          fillColor: Colors.purple.shade50,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide.none,
+                          ),
+                        ),
+                        keyboardType: TextInputType.phone,
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return 'Mobile number is required';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 12),
+                      TextFormField(
+                        controller: passwordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: 'Password',
+                          prefixIcon: Icon(Icons.lock_outline),
+                          filled: true,
+                          fillColor: Colors.purple.shade50,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide.none,
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return 'Password is required';
+                          }
+                          if (value.length < 6) {
+                            return 'Password must be at least 6 characters';
+                          }
+                          return null;
+                        },
+                      ),
