@@ -12,7 +12,7 @@ class LearningStatsPage extends StatefulWidget {
 }
 
 class _LearningStatsPageState extends State<LearningStatsPage> {
-  int _currentIndex = 2; // Assuming index 1 = Progress
+  int _currentIndex = 2; // Assuming index 2 = Progress
   final List<String> _routes = ['/home', '/progress', '/courses', '/account'];
 
   void _onNavTapped(int index) {
@@ -46,6 +46,10 @@ class _LearningStatsPageState extends State<LearningStatsPage> {
                   _sectionTitle('🏆 Achievements'),
                   _infoRow('Badges Earned', '5'),
                   _infoRow('Certificates', '2 (Downloadable)'),
+                  const SizedBox(height: 20),
+                  _sectionTitle('🔥 Study Streak'),
+                  _infoRow('Current Streak', '5 days'),
+                  _infoRow('Longest Streak', '12 days'),
                   const SizedBox(height: 20),
                   _sectionTitle('📚 Course Info'),
                   _infoRow('Enrolled Courses', 'Python Basics, OOP in Python'),
