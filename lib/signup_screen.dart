@@ -28,3 +28,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
+       // Save user info to Firestore
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({
+        'username': usernameController.text.trim(),
+        'email': emailController.text.trim(),
+        'mobile': mobileController.text.trim(),
+        'uid': userCredential.user!.uid,
+        'createdAt': Timestamp.now(),
+      });
