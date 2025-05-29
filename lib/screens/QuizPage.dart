@@ -132,3 +132,31 @@ class _QuizPageState extends State<QuizPage> {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
+                const SizedBox(height: 16),
+                Text(
+                  question['question'],
+                  style: const TextStyle(fontSize: 20),
+                ),
+                const SizedBox(height: 24),
+                ...List.generate(question['options'].length, (index) {
+                  final isSelected = selectedOption == index;
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedOption = index;
+                      });
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 6),
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: isSelected
+                            ? Colors.deepPurple.shade100
+                            : Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: isSelected
+                              ? Colors.deepPurple
+                              : Colors.grey.shade300,
+                        ),
+                      ),
