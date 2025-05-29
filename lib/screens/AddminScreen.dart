@@ -51,6 +51,39 @@ class _AdminScreenState extends State<AddminScreen> {
     );
   }
 
+  void _editCourseDialog(DocumentSnapshot courseDoc) {
+    final course = courseDoc.data() as Map<String, dynamic>;
+    final titleController = TextEditingController(text: course['title']);
+    final descriptionController = TextEditingController(text: course['description']);
+
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text("Edit Course"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(controller: titleController, decoration: const InputDecoration(labelText: "Title")),
+            TextField(controller: descriptionController, decoration: const InputDecoration(labelText: "Description")),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              await _firestore.collection('courses').doc(courseDoc.id).update({
+                'title': titleController.text,
+                'description': descriptionController.text,
+                'updatedAt': Timestamp.now(),
+              });
+              Navigator.pop(context);
+            },
+            child: const Text("Update"),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildUserTile(DocumentSnapshot userDoc) {
     final user = userDoc.data() as Map<String, dynamic>;
     return ListTile(
@@ -68,9 +101,18 @@ class _AdminScreenState extends State<AddminScreen> {
     return ListTile(
       title: Text(course['title']),
       subtitle: Text(course['description']),
-      trailing: IconButton(
-        icon: const Icon(Icons.delete, color: Colors.red),
-        onPressed: () => _deleteCourse(courseDoc.id),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.edit, color: Colors.blue),
+            onPressed: () => _editCourseDialog(courseDoc),
+          ),
+          IconButton(
+            icon: const Icon(Icons.delete, color: Colors.red),
+            onPressed: () => _deleteCourse(courseDoc.id),
+          ),
+        ],
       ),
     );
   }
