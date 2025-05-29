@@ -16,3 +16,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool isLoading = false;
 
   final _formKey = GlobalKey<FormState>();
+  
+  Future<void> signUp() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => isLoading = true);
+    try {
+      // Create user in Firebase Auth
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
