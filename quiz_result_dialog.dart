@@ -13,4 +13,6 @@ void showQuizResultDialog({
     builder: (_) => AlertDialog(
       backgroundColor: Colors.red.shade50,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      title: Text(
+      title: Text(  isPassed ? 'Quiz Passed 🎉' : 'Quiz Failed 😞',
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
