@@ -10,3 +10,5 @@ class Appbardf extends StatelessWidget implements PreferredSizeWidget {
 
     // Overriding the build method to return the custom AppBar UI
   @override
+  Widget build(BuildContext context) {
+    return AppBar(
