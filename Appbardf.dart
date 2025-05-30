@@ -8,3 +8,5 @@ class Appbardf extends StatelessWidget implements PreferredSizeWidget {
    // Constructor with an optional key parameter
   const Appbardf({super.key});
 
+    // Overriding the build method to return the custom AppBar UI
+  @override
