@@ -9,7 +9,7 @@ class MyCoursesPage extends StatelessWidget {
     {
       'title': 'Python Basics',
       'level': 'Beginner',
-      'progress': 0.6,
+      'progress': 0.6,.
     },
     {
       'title': 'OOP in Python',
