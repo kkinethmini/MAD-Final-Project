@@ -27,3 +27,6 @@ class Appbardf extends StatelessWidget implements PreferredSizeWidget {
 
            actions: [ // Widgets displayed at the right side of the AppBar
 
+  
+        Builder( // Using Builder to get the correct context for Scaffold
+          builder:
