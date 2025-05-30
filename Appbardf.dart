@@ -5,4 +5,6 @@ import 'package:flutter/material.dart';
 // Defining a stateless widget called Appbardf that implements PreferredSizeWidget
 class Appbardf extends StatelessWidget implements PreferredSizeWidget {
 
- 
+   // Constructor with an optional key parameter
+  const Appbardf({super.key});
+
