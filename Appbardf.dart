@@ -21,3 +21,7 @@ class Appbardf extends StatelessWidget implements PreferredSizeWidget {
           color: Colors.white, // Sets text color to white
         ),
       ),
+
+           backgroundColor: Colors.green,  // Sets the background color of the AppBar
+      automaticallyImplyLeading: false, // Disables default leading icon
+
