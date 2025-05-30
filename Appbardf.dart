@@ -32,3 +32,11 @@ class Appbardf extends StatelessWidget implements PreferredSizeWidget {
           builder:
                        (context) => IconButton( // IconButton widget to open drawer
                   icon: const Icon(Icons.menu),// Menu icon as the button
+
+                                        onPressed: () => Scaffold.of(context).openDrawer(),  // Opens the drawer when tapped
+              ),
+        ),
+      ],
+    );
+  }
+
