@@ -39,4 +39,5 @@ class Appbardf extends StatelessWidget implements PreferredSizeWidget {
       ],
     );
   }
-
+  // Overriding preferredSize to set the AppBar's height
+   @override
