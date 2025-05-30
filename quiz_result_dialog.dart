@@ -8,4 +8,9 @@ void showQuizResultDialog({
 })  {
   final bool isPassed = score >= 6;
 
-  showDialog(
+  showDialog( context: context,
+    barrierDismissible: false,
+    builder: (_) => AlertDialog(
+      backgroundColor: Colors.red.shade50,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      title: Text(
