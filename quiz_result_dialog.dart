@@ -23,4 +23,5 @@ void showQuizResultDialog({
                            style: const TextStyle(fontSize: 16),
       ),
 actions: [
-           TextButton(
+           TextButton( 
+               onPressed: isPassed ? onPass : onFail,
