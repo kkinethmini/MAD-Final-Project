@@ -30,3 +30,4 @@ class Appbardf extends StatelessWidget implements PreferredSizeWidget {
   
         Builder( // Using Builder to get the correct context for Scaffold
           builder:
+                       (context) => IconButton( // IconButton widget to open drawer
