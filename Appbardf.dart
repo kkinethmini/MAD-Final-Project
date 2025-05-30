@@ -41,3 +41,7 @@ class Appbardf extends StatelessWidget implements PreferredSizeWidget {
   }
   // Overriding preferredSize to set the AppBar's height
    @override
+
+   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
