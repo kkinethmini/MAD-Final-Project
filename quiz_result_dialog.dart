@@ -16,3 +16,4 @@ void showQuizResultDialog({
       title: Text(  isPassed ? 'Quiz Passed 🎉' : 'Quiz Failed 😞',
         style: const TextStyle(fontWeight: FontWeight.bold),
       ),
+          content: Text(
