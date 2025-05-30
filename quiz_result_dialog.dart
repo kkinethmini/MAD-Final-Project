@@ -5,4 +5,7 @@ void showQuizResultDialog({
   required int totalQuestions,
   required VoidCallback onPass,
   required VoidCallback onFail,
-})
+})  {
+  final bool isPassed = score >= 6;
+
+  showDialog(
