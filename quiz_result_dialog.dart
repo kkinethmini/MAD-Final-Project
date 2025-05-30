@@ -18,4 +18,5 @@ void showQuizResultDialog({
       ),
           content: Text(  
                           'You scored $score out of $totalQuestions.\n'
+                           '${isPassed ? 'Great! You may continue the course.' : 'Please try again to proceed.'}',
              
