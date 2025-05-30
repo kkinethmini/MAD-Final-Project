@@ -26,3 +26,8 @@ actions: [
            TextButton( 
                onPressed: isPassed ? onPass : onFail,
                child: Text(isPassed ? 'Continue Course' : 'Retry Quiz'),
+   ),
+      ],
+    ),
+  );
+}
