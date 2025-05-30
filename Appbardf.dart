@@ -12,3 +12,12 @@ class Appbardf extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+          // Title text displayed in the center of the AppBar
+      title: const Text(
+        "edex1",
+        style: TextStyle(
+          fontWeight: FontWeight.w500, // Sets medium weight for the font
+          fontSize: 24,
+          color: Colors.white, // Sets text color to white
+        ),
+      ),
